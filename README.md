@@ -20,12 +20,32 @@ Laptop with Keil uVision software
 5.	Introduce a delay.
 6.	Repeat the process continuously.
 ## Program:
+```
+ORG 0000H      ; Start of program
+MOV P1, #00H   ; Set Port 1 as output
+
+MAIN:  SETB P1.0  ; Set P1.0 HIGH
+       CALL DELAY  ; Call delay function
+       CLR P1.0    ; Set P1.0 LOW
+       CALL DELAY  ; Call delay function
+       SJMP MAIN   ; Repeat the process
+
+DELAY: MOV R7, #255  ; Outer loop
+       MOV R6, #255  ; Inner loop
+       DJNZ R6, $    ; Decrement inner loop
+       DJNZ R7, $    ; Decrement outer loop
+       RET           ; Return from delay
+
+END
+```
 ## Simulation in Proteus:
 1.	Open Proteus and load the HEX file generated from Keil.
 2.	Connect P1.0 to an oscilloscope.
 3.	Run the simulation and observe the square wave on the oscilloscope.
 4.	Adjust delay loops if needed to modify the wave frequency.
 ## Output:
+![WhatsApp Image 2025-11-14 at 13 40 07_54081b1f](https://github.com/user-attachments/assets/28058222-4632-4b6c-ada1-c2fe8a745f59)
+![WhatsApp Image 2025-11-14 at 13 42 42_f3644f1d](https://github.com/user-attachments/assets/232d26e7-38b5-42a2-b301-1b19eb44dcee)
 A square wave will be observed on the oscilloscope with a defined time period.
 ## Result:
 The square wave generation using the 8051 microcontroller has been successfully implemented and simulated using Keil and Proteus.
